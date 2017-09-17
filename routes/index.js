@@ -6,6 +6,10 @@ router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index');
 });
 
+router.get('/characterPage', ensureAuthenticated, function(req, res){
+	res.render('characterPage');
+});
+
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

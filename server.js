@@ -17,11 +17,14 @@ var sequelize = require('sequelize');
 var db = require("./models");
 var PORT = 3000;
 
-var routes = require('./routes/index');
+var html = require('./routes/index');
 var users = require('./routes/users');
+//var api = require('./routes/apiRoutes');
+
 
 // Init App
 var app = express();
+
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -79,8 +82,9 @@ app.use(function (req, res, next) {
 
 
 
-app.use('/', routes);
+app.use('/', html);
 app.use('/users', users);
+//app.use('/api', api);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
