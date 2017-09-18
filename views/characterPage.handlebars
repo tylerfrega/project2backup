@@ -1,4 +1,19 @@
  <h2 class="page-header">Character Page</h2>
-<p>Welcome to RollPG</p>  
+<p>Create a character</p>  
 
 
+<form method="post" action="/api/character">
+   <div class="form-group">
+    <label>Character Name</label>
+    <input type="text" class="form-control" placeholder="CharacterName" name="characterName">
+  </div>
+  <div class="form-group">
+    <label>HP</label>
+    <input type="text" class="form-control" placeholder="hp" name="hp">
+  </div>
+   <div class="form-group">
+    <label>AP</label>
+    <input type="text" class="form-control" placeholder="ap" name="ap">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

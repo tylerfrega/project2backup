@@ -9,18 +9,9 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var sequelize = require('sequelize');
-//var mongo = require('mongodb');
-//var mongoose = require('mongoose');
 
-//mongoose.connect('mongodb://localhost/loginapp');
-//var db = mongoose.connection;
 var db = require("./models");
 var PORT = 3000;
-
-var html = require('./routes/index');
-var users = require('./routes/users');
-//var api = require('./routes/apiRoutes');
-
 
 // Init App
 var app = express();
@@ -82,9 +73,10 @@ app.use(function (req, res, next) {
 
 
 
-app.use('/', html);
-app.use('/users', users);
-//app.use('/api', api);
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/api', require('./routes/apiRoutes'));
+
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

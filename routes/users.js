@@ -97,15 +97,18 @@ passport.use(new LocalStrategy(
 
 // Serialize sessions
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+	var sessionUser = {id:user.id, name: user.name, email: user.email}
+  done(null, sessionUser);
 });
 
-passport.deserializeUser(function(id, done) {
-  db.User.find({where: {id: id}}).then(function(user){
-    done(null, user);
-  }).error(function(err){
-    done(err, null);
-  });
+passport.deserializeUser(function(sessionUser, done) {
+  // db.User.find({where: {id: id}}).then(function(user){
+  //   done(null, sessionUser);
+  // }).error(function(err){
+  //   done(err, null);
+	// });
+	done(null, sessionUser);
+	console.log(sessionUser);
 });
 
 
