@@ -9,7 +9,6 @@ router.post('/character', function(req, res){
         hp: req.body.hp,
         ap: req.body.ap,
         UserId: req.user.id
-        //figure out how to add user id
     }
     db.Character.create(newCharacter);
 });

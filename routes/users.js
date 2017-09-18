@@ -108,7 +108,7 @@ passport.deserializeUser(function(sessionUser, done) {
   //   done(err, null);
 	// });
 	done(null, sessionUser);
-	console.log(sessionUser);
+
 });
 
 
