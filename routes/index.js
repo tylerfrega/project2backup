@@ -1,14 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var db = require("../models");
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index', {user: req.user});
 });
 
-router.get('/characterPage', ensureAuthenticated, function(req, res){
-	res.render('characterPage');
+router.get('/createCharacter', ensureAuthenticated, function(req, res){
+	res.render('createCharacter');
 });
+
+router.get('/characters', ensureAuthenticated, function(req, res){
+	res.render('characters', {user: req.user})
+	
+});
+
+
+
+
+
+
+
+
+
+
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -20,3 +36,5 @@ function ensureAuthenticated(req, res, next){
 }
 
 module.exports = router;
+
+

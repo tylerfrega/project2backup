@@ -7,12 +7,19 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.STRING,
             index:true
         },
-        hp: {
+        class:{
             type: DataTypes.STRING
         },
+        hp: {
+            type: DataTypes.INTEGER
+        },
         ap: {
-            type: DataTypes.STRING
+            type: DataTypes.INTEGER
+        },
+        de:{
+            type: DataTypes.INTEGER
         }
+        
     });
 
     Character.associate = function(models) {
