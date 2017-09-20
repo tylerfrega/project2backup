@@ -1,9 +1,30 @@
-function getCharacterInfo(){
-    
+$(document).ready(function(){
+    var characterHolder = $('#characterDisplay')
+    var characters;
+    //gets character data
     $.get('/api/character', function(data){
-        var characters = data
+        characters = data
         console.log(characters);
-    })
+    }).then(function(){
+
+    //makes character buttons
+    characters.forEach(function(character) {
+        console.log(character.characterName)
+        characterHolder.append(`<button class="characterSelector">${character.characterName}</button>`);
+    });
+
+    $('.characterSelector').on('click', selectCharacter);
+
+});
+
+
+function selectCharacter(){
+    
 }
 
-getCharacterInfo();
+
+//end of ready function
+})
+
+
+

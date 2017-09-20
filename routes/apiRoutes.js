@@ -21,8 +21,18 @@ router.get('/character', function(req, res){
 		where:{UserId: req.user.id}
 	}).then(function(characterData){
 		res.json(characterData);
+	});
+});
+
+router.get('/selectCharacter', function(req, res){
+    db.Character.findOne({
+		where:{characterName: req.body.characterName}
+	}).then(function(characterData){
+		res.json(characterData);
 	})
 })
+
+
 
 
 module.exports = router;
