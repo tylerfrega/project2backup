@@ -1,7 +1,15 @@
- <h2 class="page-header">Index/Homepage</h2>
-<p>Welcome {{user.name}}</p>  
+ <h2 id="welcome" class="page-header">Welcome {{user.name}}</h2>
+ <p class="instruct">please select the character in which you'd like to play</p>
+
+{{!-- {{#each character}}
+  <button id="character" type="submit">{{character.name}}</button>
+{{/each}}
+ --}}
 
 
+<form action="/characterPage">
+ <button id="character" type="submit">Continue to Character Page</button>
+</form>
 <form action="/createCharacter">
  <button type="submit" class="btn btn-default">Create a new Character</button>
 </form>

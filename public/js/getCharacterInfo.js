@@ -28,12 +28,19 @@ function makeCharacterButtons(){
 }
 
 
-function Character(characterName, characterClass, hp, ap, de, ) {
+function Character(characterName, characterClass, hp, ap, de, weapon, lore ) {
     this.characterName = characterName;
     this.characterClass = characterClass;
     this.hp = hp;
     this.ap = ap;
     this.de = de;
+    this.weapon = weapon;
+    this.lore = lore;
+    this.attack = function(){
+        
+    },
+    this.check = function(){}
+    
 }
 
 
@@ -44,7 +51,12 @@ function selectCharacter(){
                                          characters[selectedCharacter].class,
                                          characters[selectedCharacter].hp,
                                          characters[selectedCharacter].ap,
-                                         characters[selectedCharacter].de);
+                                         characters[selectedCharacter].de,
+                                         characters[selectedCharacter].weapon,
+                                         characters[selectedCharacter].lore
+                                        );
     console.log(sessionCharacter);
+    localStorage.setItem('sessionCharacter', JSON.stringify(sessionCharacter));
+
 }
     

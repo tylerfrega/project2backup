@@ -1,11 +1,17 @@
 var db = require("../models");
 
-
+/*Steve:  edited characterName to include validation, lines 9 - 10 (allowNull and validate),
+added lore to the character, lines  27- 32, includes validation 
+(allowNull: true, validate for len). allowNull set to true for lore in case player doesn't want it.*/ 
 module.exports = function(sequelize, DataTypes){
     var Character = sequelize.define('Character', {
         characterName: {
             type: DataTypes.STRING,
-            index:true
+            index:true,
+            allowNull: false,
+            validate: {
+                len: [1, 30]
+            }
         },
         class:{
             type: DataTypes.STRING
@@ -16,8 +22,18 @@ module.exports = function(sequelize, DataTypes){
         ap: {
             type: DataTypes.INTEGER
         },
-        de:{
+        de: {
             type: DataTypes.INTEGER
+        },
+        weapon:{
+            type: DataTypes.STRING
+        },
+        lore: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+            validate: {
+                len: [1, 200]
+            }
         }
         
     });

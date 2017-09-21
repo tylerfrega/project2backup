@@ -7,13 +7,31 @@
     <label>Character Name</label>
     <input type="text" class="form-control" id="characterName" placeholder="CharacterName">
   </div>
-  
+
+  <div class="form-group">
+    <label>Character Lore</label>
+    <input type="text" class="form-control" id="characterLore" placeholder="Character Lore">
+  </div>
+
+</form>  
+  <h3>Select Character Weapons</h3>
+
+  <h4>Archer Weapons</h4>
+  <div id="archerWeaponsHolder"></div>
+  <h4>Mage Weapons</h4>
+  <div id="mageWeaponsHolder"></div>
+  <h4>Warrior Weapons</h4>
+  <div id="warriorWeaponsHolder"></div>
+
   
 <h3>Select Character Class</h3>
-  <button class="btn-btn-default" id="createArcher">Archer</button>
-  <button class="btn-btn-default" id="createMage">Mage</button>
-  <button class="btn-btn-default" id="createWarrior">Warrior</button>
-</form>
+  <button class="btn-btn-default classBtn" id="createArcher" data-className="Archer">Archer</button>
+  <button class="btn-btn-default classBtn" id="createMage" data-className="Mage">Mage</button>
+  <button class="btn-btn-default classBtn" id="createWarrior" data-className="Warrior">Warrior</button>
+
+
+  <button id="submitCharacter" type="submit">Create Character</button>
+
 
 
 

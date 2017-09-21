@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require("../models");
-
+//Steve:  added lore to newCharacter variable, line 13.
 //post route to create a new character
 router.post('/character', function(req, res){
     var newCharacter = {
@@ -10,6 +10,8 @@ router.post('/character', function(req, res){
         hp: req.body.hp,
         ap: req.body.ap,
         de: req.body.de,
+        weapon: req.body.weapon,
+        lore: req.body.lore,
         UserId: req.user.id
     }
     db.Character.create(newCharacter);
