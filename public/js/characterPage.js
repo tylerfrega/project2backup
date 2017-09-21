@@ -1,8 +1,11 @@
 $(document).ready(function(){
 //createWeaponsBtn();
 //event handlers
+$('#selectWeaponText').hide();
+$('#submitCharacterDiv').hide();
 $(document).on('click', '.classBtn', selectClass);
 $(document).on('click', '.weaponsSelectorBtn', selectWeapon);
+$(document).on('click', '#changeSelection', changeSelection );
 $('#submitCharacter').on('click', createCharacter);
 
 });
@@ -23,6 +26,9 @@ var selectedWeapon;
 
 function selectClass(){
     selectedClass = $(this).attr('data-className');
+    $('#selectedClassText').html(`Selected Class: ${selectedClass}`);
+    $('.classBtn').hide();
+    $('#selectWeaponText').show();
     console.log(selectedClass);
 
     switch(selectedClass){
@@ -53,6 +59,11 @@ function selectWeapon(){
         selectedWeapon = warriorWeapons[selectedWeaponIndex];
     }
     console.log(selectedWeapon);
+    $('#selectWeaponText').html(`Selected Weapon: ${selectedWeaponName}`);
+   // $('#selectWeaponsText').show();
+    $('.weaponsSelectorBtn').hide();
+    $('#submitCharacterDiv').show();
+    
 
     Archer = {
         hp: 125,
@@ -111,7 +122,7 @@ function createMageWeaponsBtn(){
 
 
 function createWarriorWeaponsBtn(){
-    
+
     $('#selectWeaponsText').show();
     $('.archerWeapons').hide();
     $('.mageWeapons').hide();
@@ -124,6 +135,13 @@ function createWarriorWeaponsBtn(){
     });
 }
 
+function changeSelection(){
+    $('.classBtn').show();
+    $('#selectWeaponText').html('Select Your Weapon');
+    $('#selectWeaponText').hide();
+    $("#selectedClassText").html('Select Character Class');
+    $('#submitCharacterDiv').hide();
+}
    
 
 

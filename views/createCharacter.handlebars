@@ -16,18 +16,25 @@
 </form>  
   
   
-<h3>Select Character Class</h3>
+<h3 id="selectedClassText">Select Character Class</h3>
+
+
+
   <button class="btn-btn-default classBtn" id="createArcher" data-className="Archer">Archer</button>
   <button class="btn-btn-default classBtn" id="createMage" data-className="Mage">Mage</button>
   <button class="btn-btn-default classBtn" id="createWarrior" data-className="Warrior">Warrior</button>
 
-  <h4 id="selectWeaponText">Select Your Weapon</h4>
+  <h3 id="selectWeaponText">Select Your Weapon</h3>
   <div id="archerWeaponsHolder"></div>
   <div id="mageWeaponsHolder"></div>
   <div id="warriorWeaponsHolder"></div>
 
 
+<div id="submitCharacterDiv">
   <button id="submitCharacter" type="submit">Create Character</button>
+  '<button id="changeSelection">Change Selections</button>
+</div>
+ 
 
 
 
