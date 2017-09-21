@@ -1,5 +1,5 @@
 $(document).ready(function(){
-createWeaponsBtn();
+//createWeaponsBtn();
 //event handlers
 $(document).on('click', '.classBtn', selectClass);
 $(document).on('click', '.weaponsSelectorBtn', selectWeapon);
@@ -24,6 +24,18 @@ var selectedWeapon;
 function selectClass(){
     selectedClass = $(this).attr('data-className');
     console.log(selectedClass);
+
+    switch(selectedClass){
+        case "Archer":
+            createArcherWeaponsBtn();
+            break;
+        case "Mage":
+            createMageWeaponsBtn();
+            break;
+        case "Warrior":
+            createWarriorWeaponsBtn();
+            break;
+    }
 
 }
  
@@ -67,36 +79,60 @@ function selectWeapon(){
 }
 
 
-function createWeaponsBtn(){
-    var archerWeaponsHolder = $('#archerWeaponsHolder');
-    var mageWeaponsHolder = $('#mageWeaponsHolder');
-    var warriorWeaponsHolder = $('#warriorWeaponsHolder');
 
+function createArcherWeaponsBtn(){
+
+    $('#selectWeaponsText').show();
+    $('.mageWeapons').hide();
+    $('.warriorWeapons').hide();
+
+    var archerWeaponsHolder = $('#archerWeaponsHolder');
     archerWeapons.forEach(function(weapon, index) {
-        archerWeaponsHolder.append(`<button class="weaponsSelectorBtn" data-value= "${index}" 
+        archerWeaponsHolder.append(`<button class="weaponsSelectorBtn archerWeapons" data-value= "${index}" 
                                     "data-weapon="${archerWeapons[index].weaponName}">
                                     ${archerWeapons[index].weaponName}</button>`);
     });
+}
 
+function createMageWeaponsBtn(){
+
+    $('#selectWeaponsText').show();
+    $('.warriorWeapons').hide();
+    $('.archerWeapons').hide();
+
+    var mageWeaponsHolder = $('#mageWeaponsHolder');
     mageWeapons.forEach(function(weapon, index) {
-        mageWeaponsHolder.append(`<button class="weaponsSelectorBtn" data-value= "${index}" 
+        mageWeaponsHolder.append(`<button class="weaponsSelectorBtn mageWeapons" data-value= "${index}" 
                                   "data-weapon="${mageWeapons[index].weaponName}">
                                     ${mageWeapons[index].weaponName}</button>`);
-    });
-
-    warriorWeapons.forEach(function(weapon, index) {
-        warriorWeaponsHolder.append(`<button class="weaponsSelectorBtn" data-value= "${index}" 
-                                     "data-weapon="${mageWeapons[index].weaponName}">
-                                    ${warriorWeapons[index].weaponName}</button>`);
+    
     });
 }
+
+
+function createWarriorWeaponsBtn(){
+    
+    $('#selectWeaponsText').show();
+    $('.archerWeapons').hide();
+    $('.mageWeapons').hide();
+
+    var warriorWeaponsHolder = $('#warriorWeaponsHolder');
+    warriorWeapons.forEach(function(weapon, index) {
+        warriorWeaponsHolder.append(`<button class="weaponsSelectorBtn warriorWeapons" data-value= "${index}" 
+                                     "data-weapon="${mageWeapons[index].weaponName}">
+                                    ${warriorWeapons[index].weaponName}</button>`);    
+    });
+}
+
+   
+
 
 function createCharacter(){
     switch(selectedClass){
         case "Archer":
             createArcher();
             break;
-         case "Mage":
+        case "Mage":
             createMage();
             break;
         case "Warrior":
