@@ -16,6 +16,11 @@ router.get('/characters', ensureAuthenticated, function(req, res){
 	
 });
 
+router.get('/game', ensureAuthenticated, function(req, res){
+	res.render('game', {user: req.user})
+	
+});
+
 
 
 

@@ -176,43 +176,43 @@ console.log(selectedWeapon.weaponName)
                lore: $('#characterLore').val()
               },
         success: console.log('sent')
-      });
+    });
 };
 
 function createMage(){
     
-        $.ajax({
-            method: "POST",
-            url: "api/character",
-            data: {
-                   characterName: $('#characterName').val().trim(), 
-                   class:"Mage",
-                   hp: Mage.hp,
-                   ap: Mage.ap,
-                   de: Mage.de,
-                   weapon: Mage.weapon,
-                   lore: $('#characterLore').val()
-                  },
-            success: console.log('sent')
-          });
-    };
+    $.ajax({
+        method: "POST",
+        url: "api/character",
+        data: {
+                characterName: $('#characterName').val().trim(), 
+                class:"Mage",
+                hp: Mage.hp,
+                ap: Mage.ap,
+                de: Mage.de,
+                weapon: Mage.weapon,
+                lore: $('#characterLore').val()
+                },
+        success: console.log('sent')
+    });
+};
 
 function createWarrior(){
-    
-        $.ajax({
-            method: "POST",
-            url: "api/character",
-            data: {
-                    characterName: $('#characterName').val().trim(), 
-                    class:"Warrior",
-                    hp: Warrior.hp,
-                    ap: Warrior.ap,
-                    de: Warrior.de,
-                    weapon: Warrior.weapon,
-                    lore: $('#characterLore').val()
-                    },
-            success: console.log('sent')
-            });
-    };
+
+    $.ajax({
+        method: "POST",
+        url: "api/character",
+        data: {
+                characterName: $('#characterName').val().trim(), 
+                class:"Warrior",
+                hp: Warrior.hp,
+                ap: Warrior.ap,
+                de: Warrior.de,
+                weapon: Warrior.weapon,
+                lore: $('#characterLore').val()
+                },
+        success: console.log('sent')
+    });
+};
 
     

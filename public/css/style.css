@@ -20,8 +20,8 @@ body {
   border-width: thick;
 }
 #title {
-  height: 50px;
-  width: 100px;
+  height: 60px;
+  width: 140px;
   z-index: 1000;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -55,7 +55,7 @@ body {
   margin-bottom: 0px;
 }
 #character {
-  display: block;
+  display: inline-block;
   text-align: center;
 }
 .instruct {
