@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require("../models");
 
-// Get Homepage
+// These functions render the appropriate html pages
 router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index', {user: req.user});
 });

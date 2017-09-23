@@ -16,8 +16,8 @@ router.post('/character', function(req, res){
     }
     db.Character.create(newCharacter);
     //redirect to new page displaying characters???
-});
-
+})
+//returns all character created by current user
 router.get('/character', function(req, res){
     db.Character.findAll({
 		where:{UserId: req.user.id}
@@ -26,6 +26,7 @@ router.get('/character', function(req, res){
 	});
 });
 
+//returns character that user selects to play as
 router.get('/selectCharacter', function(req, res){
     db.Character.findOne({
 		where:{characterName: req.body.characterName}

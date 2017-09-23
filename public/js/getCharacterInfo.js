@@ -8,7 +8,9 @@ $(document).on('click', '.characterSelector', selectCharacter );
 var characters;
 var sessionCharacter;
 
-
+//this function retrieves and displays the characters that the user has already created, 
+//the users created characters are stored in the characters array (global variable defined above)
+//each btn has a data value that acts as the index of the characters array
 function makeCharacterButtons(){
     var characterHolder = $('#characterDisplay')
     
@@ -28,7 +30,7 @@ function makeCharacterButtons(){
 });
 }
 
-
+//this function stores the selected character in local memory, so we can access that info on the game.js page
 function selectCharacter(){
     var selectedCharacterIndex = $(this).attr('data-value');
     var selectedCharacter = characters[selectedCharacterIndex];

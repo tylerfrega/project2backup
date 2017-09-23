@@ -2,6 +2,7 @@ $(document).ready(function(){
 //createWeaponsBtn();
 //event handlers
 $('#selectWeaponText').hide();
+$('#goToCharactersPage').hide();
 $('#submitCharacterDiv').hide();
 $(document).on('click', '.classBtn', selectClass);
 $(document).on('click', '.weaponsSelectorBtn', selectWeapon);
@@ -23,7 +24,8 @@ var selectedClass;
 var selectedWeapon;
 
 
-
+//when the user selcts their class the app will display the weapons associated with that class/
+// from the selected class weapons array (defined as a global variable)
 function selectClass(){
     selectedClass = $(this).attr('data-className');
     $('#selectedClassText').html(`Selected Class: ${selectedClass}`);
@@ -45,6 +47,9 @@ function selectClass(){
 
 }
  
+//after the user selects their class and the appropriate weapons display, 
+//the selected weapon will be assigned depending on which btn the user clicks
+//each weapons btn has a data-value attr that acts as the index of the selected btn from the selected class weapons array
 function selectWeapon(){
     var selectedWeaponName = $(this).html().trim();
     var selectedWeaponIndex = $(this).attr('data-value');
@@ -90,7 +95,7 @@ function selectWeapon(){
 }
 
 
-
+//these functions display the weapons btns accociated with the user's selected class
 function createArcherWeaponsBtn(){
 
     $('#selectWeaponsText').show();
@@ -135,6 +140,7 @@ function createWarriorWeaponsBtn(){
     });
 }
 
+// if the user wants to change their class or weapons selection the weapons btns will be hidden and the class btns will display
 function changeSelection(){
     $('.classBtn').show();
     $('#selectWeaponText').html('Select Your Weapon');
@@ -144,8 +150,10 @@ function changeSelection(){
 }
    
 
-
+//this function  is executed on the create character btn click. runs the appropriate function depending on their selection
 function createCharacter(){
+    $('#submitCharacterDiv').hide();
+    $('#goToCharactersPage').show();
     switch(selectedClass){
         case "Archer":
             createArcher();
@@ -160,7 +168,7 @@ function createCharacter(){
 }
 
 
-
+//these functions send the selected class and weapoon info to be stored in the database 
 function createArcher(){
 console.log(selectedWeapon.weaponName)
     $.ajax({
