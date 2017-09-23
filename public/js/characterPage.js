@@ -230,19 +230,4 @@ function createWarrior(){
     });
 };
 
-// $(document).ready(function() {
-//     $('.btn').hover(function() {
-//         var id = $(this).attr('data-id');
-//         $('.b-' + id + '-text').show();
-//       }, function() {
-//         $('.b-text').hide();
-//       })
 
-    
-//     });   
-       
-
-        //   .on('click',function() {
-    //       var id = $(this).attr('data-id');
-    //       $('.b-' + id + '-text').toggleClass('selected');
-    //   });
