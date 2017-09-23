@@ -1,5 +1,5 @@
 
-.class-btn { 
+.classBtn { 
   font-size:1.1em; 
   padding:6px 18px; 
   display:inline-block; 
@@ -17,7 +17,7 @@
   text-shadow:-1px -1px 1px rgba(0,0,0,0.1);
   text-decoration: none;
 }
-.class-btn:hover {
+.classBtn:hover {
     transform:none; 
     box-shadow:0 2px 0 rgba(0,0,0,0.1), 
     inset 0 0 5px rgba(255,255,255,0.4); 
@@ -30,7 +30,7 @@
     display: none;
 }
 #info-spot {
-    height: 50px;
+    height: 150px;
 }
 /* li > a:focus {
   background-color: #9c6e58;
