@@ -125,11 +125,11 @@ function Character(characterName, characterClass, hp, ap, de, weapon, lore ) {
         }
         else if(rollTotal >=15 && rollTotal <27){
             result = 'Success';
-            enemy.hp -= rollTotal + this.ap + enemy.de;
+            enemy.hp -= rollTotal + this.ap - enemy.de;
         }
         else if(rollTotal >= 27){
             result = 'Critical Success';
-            enemy.hp -= rollTotal + this.ap;
+            enemy.hp -= rollTotal + rollTotal + this.ap;
         }
         displayRollArr.push(roll1);
         displayRollArr.push(roll2);
