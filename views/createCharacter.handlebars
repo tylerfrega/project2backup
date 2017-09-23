@@ -1,50 +1,44 @@
-<h2 class="page-header">Create a Character</h2>
-
-
-
-
-<form>
-   <div class="form-group">
-    <label>Character Name</label>
-    <input type="text" class="form-control" id="characterName" placeholder="CharacterName">
-  </div>
-
-  <div class="form-group">
-    <label>Character Lore</label>
-    <input type="text" class="form-control" id="characterLore" placeholder="Character Lore">
-  </div>
-
-</form>  
-  
-  
-<h3 id="selectedClassText">Select Character Class</h3>
-
-
-
-  <button class="btn-btn-default classBtn" id="createArcher" data-className="Archer">Archer</button>
-  <button class="btn-btn-default classBtn" id="createMage" data-className="Mage">Mage</button>
-  <button class="btn-btn-default classBtn" id="createWarrior" data-className="Warrior">Warrior</button>
-
-  <h3 id="selectWeaponText">Select Your Weapon</h3>
-  <div id="archerWeaponsHolder"></div>
-  <div id="mageWeaponsHolder"></div>
-  <div id="warriorWeaponsHolder"></div>
-
-
-<div id="submitCharacterDiv">
-  <button id="submitCharacter" type="submit">Create Character</button>
-  <button id="changeSelection">Change Selections</button>
-</div>
-
- <form id="goToCharactersPage" action="/characters">
-    <button id="charachterPageBtn">View Characters</button>
-</form>
  
+ <h2 class="page-header">Create a Character</h2>
 
 
+<div class="continer">
+  <form>
+    <div class="form-group">
+      <label>Character Name</label>
+      <input type="text" class="form-control" id="characterName" placeholder="CharacterName">
+    </div>
+
+    <div class="form-group">
+      <label>Character Lore</label>
+      <input type="text" class="form-control" id="characterLore" placeholder="Character Lore">
+    </div>
+    
+    
+  <h3>Select Character Class</h3>
+    <button class="btn class-btn" id="createArcher" data-id="1">Archer</button>
+    <button class="btn class-btn" id="createMage" data-id="2">Mage</button>
+    <button class="btn class-btn" id="createWarrior" data-id="3">Warrior</button>
 
 
-
+  <div class="row btn-text">
+    <div class="col-lg-12" id="info-spot">
+    <div class="b-1-text b-text">
+      <br>
+      <p>The Archer can strike from afar with deadly accuracy, taking down foes before they can get in range.</p>
+    </div>
+    <div class="b-2-text b-text">
+      <br>
+      <p>Masters of the arcane, Mages are always searching for knowledge of all things Magic.  Their ability to cast powerful spells makes them a valuable ally in combat, though they wear no armor.</p>
+    </div>
+    <div class="b-3-text b-text">
+      <br>
+      <p>The Warrior lives by the sword, and excels in battle.  They give as good as they get, being able to take a hit that would fell lesser folk.</p>
+    </div>
+  </div>
+  </div>
+  </form>
+</div>
 
 
  <script src="js/characterPage.js"></script>
