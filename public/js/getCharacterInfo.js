@@ -34,6 +34,8 @@ function makeCharacterButtons(){
 function selectCharacter(){
     var selectedCharacterIndex = $(this).attr('data-value');
     var selectedCharacter = characters[selectedCharacterIndex];
+    
     localStorage.setItem('selectedCharacter', JSON.stringify(selectedCharacter));
     
 }
+

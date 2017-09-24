@@ -21,6 +21,11 @@ router.get('/game', ensureAuthenticated, function(req, res){
 	
 });
 
+router.get('/dm', ensureAuthenticated, function(req, res){
+	res.render('dm', {user: req.user})
+	
+});
+
 
 
 

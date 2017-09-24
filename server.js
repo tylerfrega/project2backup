@@ -9,6 +9,8 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var sequelize = require('sequelize');
+var socket = require('socket.io');
+
 
 var db = require("./models");
 var PORT = 3000;
@@ -78,11 +80,46 @@ app.use('/users', require('./routes/users'));
 app.use('/api', require('./routes/apiRoutes'));
 
 
+
+
+
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
-db.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+// var server = db.sequelize.sync({ force: false }).then(function() {
+//   app.listen(PORT, function() {
+//     console.log("App listening on PORT " + PORT);
+//   });
+// });
+
+db.sequelize.sync({ force: false });
+var server = app.listen(PORT, function(){
+  console.log('listening')
+});
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+  console.log('connection made');
+
+  socket.on('newPlayer', function(data){
+    io.sockets.emit('newPlayer', data);
+    console.log(data)
+  });
+
+  socket.on('newEnemy', function(data){
+    io.sockets.emit('newEnemy', data);
+    console.log(data);
+  });
+
+  socket.on('enemyDamage', function(data){
+    io.sockets.emit('enemyDamage', data)
+    console.log(data);
+  });
+
+  socket.on('playerDamage', function(data){
+    io.sockets.emit('playerDamage', data)
+    console.log(data);
   });
 });
+

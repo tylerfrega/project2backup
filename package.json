@@ -23,6 +23,7 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "sequelize": "^4.8.4"
+    "sequelize": "^4.8.4",
+    "socket.io": "^2.0.3"
   }
 }
