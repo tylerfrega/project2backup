@@ -19,6 +19,12 @@ body {
   border-style: double;
   border-width: thick;
 }
+.option {
+  display: inline-block;
+}
+.homebutton {
+  display: inline-block;
+}
 #title {
   height: 60px;
   width: 140px;

@@ -10,6 +10,13 @@ $(document).on('click', '#changeSelection', changeSelection );
 $('#submitCharacter').on('click', createCharacter);
 
 });
+
+$('.btn').hover(function() {
+    var id = $(this).attr('data-id');
+    $('.b-' + id + '-text').show();
+  }, function() {
+    $('.b-text').hide();
+  })
 //consider adding name to class objects
 var name = $('#characterName').val().trim();
 var Archer;
@@ -223,4 +230,4 @@ function createWarrior(){
     });
 };
 
-    
+
