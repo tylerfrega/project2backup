@@ -1,11 +1,23 @@
 $(document).ready(function(){
 createPlayer();
 setCharacterInfo();
-setEnemyInfo();
-$('#combatRoll').on('click', function(){attack(enemy)});
+//setEnemyInfo();
+$(document).on('click', '#combatRoll', function(){attack(enemy)});
 $('#checkRoll').on('click', displyCheckRoll);
 
 });
+var enemy;
+var socket = io();
+socket.on('newEnemy', function(data){
+    setEnemyInfo(data);
+     enemy = data;
+          
+});
+socket.on('playerDamage',function(data){
+    $('#playerHp').html(`HP: ${data.hp}`);
+})
+
+
 
 var characterFromLocalStorage = JSON.parse(localStorage.getItem('selectedCharacter'));
 var player;
@@ -14,41 +26,38 @@ var rollTotalDisplay;
 var rollResult;
 
 
-
-//dummy enemy object, used for testing purposes
-var enemy = {
-    name: 'orc',
-    weaponName: 'Roundsword',
-    weaponValue: 3,
-    hp: 100,
-    ap: 13,
-    de: 3,
-    alive: true,
-    }
-
-
 ///this function executes the necessary code to preform and display the results from our player.combat roll function
 function attack(enemy){
+    console.log(enemy)
     player.combatRoll(enemy);
     displayCombatRoll();
-    setEnemyInfo();
+    setEnemyInfo(enemy);
+    sendEnemyInfo(enemy);
 }
+
+function sendEnemyInfo(enemy){
+    socket.emit('enemyDamage', enemy)
+    socket.on('enemyDamage', function(data){
+        console.log('enemy damage sent')
+    }) 
+}
+
 
 //this funcion displays the results of the users dice rolls. 
 //for now, we store the the results of the dice rolls from the player.combatRoll and player.check roll as global variables 
 //so they can be accessed by other functions
 function displayCombatRoll(){
-        $('#diceDiv').html(`Dice Rolls: ${displayRollArr[0]},  ${displayRollArr[1]}, 
+    $('#diceDiv').html(`Dice Rolls: ${displayRollArr[0]},  ${displayRollArr[1]}, 
                                          ${displayRollArr[2]}, Total: ${rollTotalDisplay}, 
                                          Result: ${rollResult}`
                                          );
-        displayRollArr = [];
+    displayRollArr = [];
 }
 
 function displyCheckRoll(){
     player.checkRoll();
     $('#diceDiv').html(`Dice Roll: ${displayRollArr[0]}
-    Result: ${rollResult}`);
+        Result: ${rollResult}`);
         displayRollArr = [];    
 }
 
@@ -56,34 +65,47 @@ function displyCheckRoll(){
 //this creates a new instance of our constructor function and assigns the object the variable name "player"
 //we will use the player variable name to preform attack and check functions on the game page
 function createPlayer(){
-     var selectedCharacter = characterFromLocalStorage;
+    var selectedCharacter = characterFromLocalStorage;
     
     sessionCharacter = new Character(selectedCharacter.characterName, 
                                          selectedCharacter.class,
                                          selectedCharacter.hp,
                                          selectedCharacter.ap,
                                          selectedCharacter.de,
+                                         selectedCharacter.alive,
                                          selectedCharacter.weapon,
                                          selectedCharacter.lore
                                         );
     player = sessionCharacter;
-    console.log(player);
-
+   
+    socket.emit('newPlayer', {
+        name:player.characterName,
+        hp: player.hp,
+        ap: player.ap,
+        de: player.de,
+        alive: player.alive,
+        weapon: player.weapon,
+        lore: player.lore
+                        
+    });
+    socket.on('newPlayer', function(data){
+        console.log(data);
+    });
 }
 
 //this function displays our characters stats. hp, ap, de, class and weapon name
 function setCharacterInfo(){
     $('#welcome').html(player.characterName);
 
-    $('#characterInfoDisplay').html(`<li class= .characterAttributes> Hp: ${player.hp}</li>
-                                       <li class= .characterAttributes> Ap: ${player.ap}</li>
-                                       <li class= .characterAttributes> De: ${player.de}</li>
-                                       <li class= .characterAttributes> Class: ${player.characterClass}</li>
-                                       <li class= .characterAttributes> Weapon: ${player.weapon}</li>`);
+    $('#characterInfoDisplay').html(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
+                                       <li class= "characterAttributes"> Ap: ${player.ap}</li>
+                                       <li class= "characterAttributes"> De: ${player.de}</li>
+                                       <li class= "characterAttributes"> Class: ${player.characterClass}</li>
+                                       <li class= "characterAttributes"> Weapon: ${player.weapon}</li>`);
 }
 
 //this function displays the current enemy stats
-function setEnemyInfo(){
+function setEnemyInfo(enemy){
     if(enemy.hp <= 0){
         enemy.alive === false
         $('#enemyName').html(`${enemy.name} has fallen`);
@@ -95,13 +117,14 @@ function setEnemyInfo(){
     $('#enemyInfoDisplay').html(`<li class= .enemyAttributes> Hp: ${enemy.hp}</li>
                                      <li class= .enemyAttributes> Ap: ${enemy.ap}</li>
                                      <li class= .enemyAttributes> De: ${enemy.de}</li>
-                                     <li class= .enemyAttributes> Weapon: ${enemy.weaponName}</li>`);
+                                     <li class= .enemyAttributes> Weapon: ${enemy.weapon}</li>`);
     }
+
 }
 
 //our constructor function. This takes the info from the selected character (stored in local memory on the getCharacterInfo.js page)
 //and creates a new object with attack and check methods attached
-function Character(characterName, characterClass, hp, ap, de, weapon, lore ) {
+function Character(characterName, characterClass, hp, ap, de, weapon, lore) {
     this.characterName = characterName;
     this.characterClass = characterClass;
     this.hp = hp;
@@ -109,6 +132,7 @@ function Character(characterName, characterClass, hp, ap, de, weapon, lore ) {
     this.de = de;
     this.weapon = weapon;
     this.lore = lore;
+    this.alive = true;
     this.combatRoll = function(enemy){
         var roll1 = Math.floor((Math.random() * 10) + 1);
         var roll2 = Math.floor((Math.random() * 10) + 1);
