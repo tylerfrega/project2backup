@@ -1,7 +1,8 @@
 $(document).ready(function(){
 initPage();
 $(document).on('click', '#createEnemyBtn', createEnemy);
-$(document).on('click', '#enemyCombatRollBtn', function(){enemyAttack(currentPlayerTurn)});
+$(document).on('click', '#enemyCombatRollBtn', function(){enemyAttack(playerArr[turnCounter])});
+$(document).on('click', '#enemyCheckRollBtn', displayEnemyCheckRoll);
 })
 
 
@@ -13,10 +14,14 @@ var currentPlayerTurn;
 var currentEnemy;
 var displayRollArr = [];
 
+socket.on('connection',function(socket){
+    console.log(socket.id)
+})
+
 socket.on('newPlayer', function(data){
     playerArr.push(data);
-    currentPlayerTurn  = playerArr[turnCounter];
-    console.log(currentPlayerTurn);
+    //currentPlayerTurn  = playerArr[turnCounter];
+    //console.log(currentPlayerTurn);
     displayPlayer(data);
 });
 
@@ -30,28 +35,50 @@ function initPage(){
 }
 
 function enemyAttack(player){
-    currentPlayerTurn  = playerArr[turnCounter];
-    turnCounter++;
-    if(turnCounter>playerArr.length){turnCounter === 0}
+   // player  = playerArr[turnCounter];
+    if(turnCounter>=playerArr.length){turnCounter === 0}
     currentEnemy.combatRoll(player);
     console.log(player);
+    displayEnemyCombatRoll();
     $('#playerHp').html(`HP: ${player.hp}`);
     sendPlayerInfo(player);
     
 }
 
+function displayEnemyCombatRoll(){
+    $('#diceDiv').html(`Dice Rolls: ${displayRollArr[0]},  ${displayRollArr[1]}, 
+    ${displayRollArr[2]}, Total: ${rollTotalDisplay}, 
+    Result: ${rollResult}`
+    );
+}
+
+function displayEnemyCheckRoll(){
+    currentEnemy.checkRoll();
+    $('#diceDiv').html(`Dice Roll: ${displayRollArr[0]}
+        Result: ${rollResult}`);
+        displayRollArr = [];    
+}
+
 function sendPlayerInfo(player){
     socket.emit('playerDamage', player)
     socket.on('playerDamage', function(data){
-        console.log('player damage sent')
+        console.log('player damage sent');
+    checkIfPlayerIsAlive(player);
     }) 
+}
+
+function checkIfPlayerIsAlive(player){
+    if(player.hp <= 0){
+        $('#playerList').hide();
+        $('#playerName').html(`${player.name} Has Fallen!`);
+    }else{return}
 }
 
 function displayPlayer(data){
 $('#welcome').hide();
-$('#playerDiv').append(`<h4>${data.name}</h4>`);
+$('#playerDiv').append(`<h4 id="playerName">${data.name}</h4>`);
 $('#playerDiv').append(`
-                        <ul>
+                        <ul id="playerList">
                         <li id="playerHp">HP: ${data.hp}</li>
                         <li>AP: ${data.ap}</li>   
                         <li>DE: ${data.de}</li>   

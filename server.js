@@ -100,7 +100,7 @@ var server = app.listen(PORT, function(){
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  console.log('connection made');
+  console.log(socket.id);
 
   socket.on('newPlayer', function(data){
     io.sockets.emit('newPlayer', data);
